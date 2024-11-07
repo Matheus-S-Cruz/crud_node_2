@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Projetos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Lista de Projetos</h1>
+    <div id="projetos-lista"></div>
+
+    <script>
+        // Fazer uma requisição AJAX para buscar os projetos
+        fetch('/projetos')
+            .then(response => response.json())
+            .then(projetos => {
+                const lista = document.getElementById('projetos-lista');
+                
+                // Adicionar cada projeto no HTML
+                projetos.forEach(projeto => {
+                    const item = document.createElement('p');
+                    item.textContent = `ID: ${projeto.id} - Nome: ${projeto.nome} - Descrição: ${projeto.descricao}`;
+                    lista.appendChild(item);
+                });
+            })
+            .catch(error => console.error('Erro ao buscar projetos:', error));
+    </script>
+</body>
+</html>
